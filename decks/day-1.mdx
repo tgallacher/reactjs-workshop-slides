@@ -1,0 +1,1320 @@
+import ReactIcon from './static/images/react-icon.svg';
+
+<Head>
+  <title>ReactJS Workshop</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" crossOrigin="anonymous" />
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" crossOrigin="anonymous" />
+</Head>
+
+# Day 1
+
+<div className="text italic">Tom Gallacher, Ph.D</div>
+
+<Notes>
+
+Housekeeping
+
+- lunch
+- coffee breaks
+- Interactive; not strict schedule
+  -- Goal is to learn something;
+- Shout out questions at any time
+
+</Notes>
+
+---
+
+# First...
+
+Introductions
+
+<i className="mt-10 em em-wave"></i>
+
+<Notes>
+
+- Name + team
+- Groups of x3 ppl (x1 with experience)
+
+</Notes>
+
+---
+
+# Pre-requisites
+
+- HTML &amp; CSS
+- DOM basics
+- ECMAScript5 fundamentals
+- ECMAScript2015+ exposure\*
+- <div className="italic">
+    <span className="text-green">
+      node (<small>LTS</small>)
+    </span>{' '}
+    &amp; <span className="text-green">npm</span> installed
+  </div>
+
+<Notes>
+
+- \*ES6 is not the focus, but we'll highlight/introduce concepts as they appear
+- brew install node
+- Git obviously
+
+</Notes>
+
+---
+
+# Objective
+
+Introduce ReactJS and explore key concepts / patterns.
+
+<Notes>
+
+- Take something away
+- Make sure and ask questions; steer the conversation
+- Call out key concepts/terms to help offline learning
+
+</Notes>
+
+---
+
+# Session Structure
+
+```
+1 hour = 20 mins + 40 mins
+```
+
+<Notes>
+
+- general approximate guide
+- No requirement on actual guide
+
+</Notes>
+
+---
+
+# Sessions
+
+<Appear>
+
+<h2 className="mb-10">
+  <div className="font-black text-orange-dark">
+    Day 1: <span className="text-green">ReactJS Foundations</span>
+  </div>
+  <div className="text-grey-darkest text-3xl mt-4">
+    Introduction to ReactJS, basics of ReactJS & how to <em>think</em> in
+    ReactJS
+  </div>
+</h2>
+
+<h2 className="mb-10">
+  <div className="font-black text-orange-dark">
+    Day 2: <span className="text-green">Advanced ReactJS</span>
+  </div>
+  <div className="text-grey-darkest text-3xl mt-4">
+    Introduction to component design partterns, APIs & how to solve common
+    problems
+  </div>
+</h2>
+
+<h2>
+  <div className="font-black text-orange-dark">
+    Day 3: <span className="text-green">Redux</span>
+  </div>
+  <div className="text-grey-darkest text-3xl mt-4">
+    State management & (async) side effect management
+  </div>
+</h2>
+
+</Appear>
+
+<Notes>
+
+- This how I think it _MIGHT_ go
+- Up to audience how it actually goes
+- Want to allow time for newer ReactJS users to get a change to understand key concepts
+- Left "breakthing" space for discussions / bug fixing
+
+</Notes>
+
+---
+
+import exampleAppImg from './static/images/example-app.png';
+
+# What will we build?
+
+<Appear>
+
+<img src={exampleAppImg} width="75%" alt="SPA app that will built during the workshop" />
+
+</Appear>
+
+<Notes>
+
+- Try to keep SB context - easier to apply after these sessions
+- DEMO app and basic functionality
+
+http://localhost:6006/?selectedKind=Demo%20App%2FApp&selectedStory=App&full=0
+
+</Notes>
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  Intro
+|
+--------------------------------------------------------- -->
+
+# Benefits of ReactJS
+
+- Declarative
+- Functional
+- Modular
+- Composable
+- Fast & Efficient updates
+- _Virtual_ DOM
+
+<Notes>
+
+Declarative
+
+- Easy to build complex UIs
+- predictable
+- Easy debug
+
+Composable / Modular
+
+- Component architecture -> encapsulation
+- Compose to build increasingly complex UIs
+
+</Notes>
+
+---
+
+# Virtual DOM
+
+- _Virtual_ representation of the UI kept in-memory
+- Sync with the _real_ DOM
+- <span className="text-purple">React Fiber</span> &
+  <span className="text-green">Reconciliation</span>
+
+<Notes>
+
+- real DOM interactions are EXPENSIVE!!
+- react fiber => new reconciliation algorithm
+- Speed isn't the only benefit of VIRTUALISATION...
+
+- Fibers - internal objects holding additional info on component tree
+
+- React Fiber: powered by 2 key heuristics:
+
+1. Different component types produce different tree; don't diff, just replace
+2. Diff lists using keys; keys are stable, predicatble and unique.
+   -> Increases efficiency by x3 orders of magnitude: O(n) vs. O(n^3)
+
+</Notes>
+
+---
+
+### Virtual DOM
+
+<!-- ReactIcon is defined at top of file -->
+
+<ReactSpinner width="512px" src={ReactIcon} />
+
+<div className="inline-block mx-8 rounded bg-green-light text-green-darker p-2">
+  DOM
+</div>
+
+<Appear>
+
+<div className="inline-block mx-8 rounded bg-yellow-dark text-yellow-darker p-2">
+  VR / AR
+</div>
+
+<div className="inline-block mx-8 rounded bg-teal-light text-teal-darker p-2">
+  WebGL
+</div>
+
+<div className="inline-block mx-8 rounded bg-orange-light text-orange-darker p-2">
+  (Native) Mobile
+</div>
+
+<div className="inline-block mx-8 rounded bg-purple-light text-purple-darker p-2">
+  Sketch App
+</div>
+
+<div className="inline-block mx-8 rounded bg-pink-light text-pink-darker p-2">
+  PDF
+</div>
+
+<div className="inline-block mx-8 rounded bg-indigo-light text-indigo-darker p-2">
+  <i className="em em-thinking_face" /> ??
+</div>
+
+</Appear>
+
+<div className="mt-10">
+  <i className="text-5xl em em-man" />
+  <i className="text-5xl em em-woman" />
+</div>
+
+<Notes>
+
+- Bindings for the DOM,
+- Wrappers around new/common web APIs
+- Bindings for any output types
+
+</Notes>
+
+---
+
+# Demo
+
+<small>Dynamic Updates</small>
+
+<Notes>
+
+- ReactJS only pushes updates to parts that have actually changed!!
+- Fast + efficient
+- Focusing on how UIs should look; not how to display/manage them: eliminates a whole class of bugs
+
+- Storybook: DataTable > Row > Available
+
+</Notes>
+
+---
+
+# MVP React App
+
+```jsx
+ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));
+```
+
+<Notes>
+
+- What does React look like?
+- Simplest React App
+- Notice "ReactDOM" not React
+
+</Notes>
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  ReactJS Elements, Components & Props
+|
+--------------------------------------------------------- -->
+
+# React Elements, Components & Props
+
+---
+
+# Hello, JSX!
+
+Javascript +️ XML = JSX
+
+<Appear>
+
+<div className="text-5xl mt-5 em em-face_vomiting" />
+
+</Appear>
+
+---
+
+```jsx
+const element = <h1 id="my-id">Hello, world!</h1>;
+```
+
+vs.
+
+```js
+const element = React.creatElement('h1', { id: 'my-id' }, 'Hello, world!');
+```
+
+<Notes>
+
+- React embraces rendering logic + UI logic are inherently coupled
+  -- handling events, state vs time, and prepare data for display
+- JSX allows us to couple these via composable blocks, called 'components'
+- JSX is distilled into React fn calls, like shown -> they are Expresions
+- No need to reinvet a new language: JSX is just JS
+
+</Notes>
+
+---
+
+- Basic
+
+```jsx
+<div>content</div>
+```
+
+- Self closing
+
+```jsx
+<div />
+```
+
+- User defined tags must be capitalised
+
+```jsx
+<Foo />
+```
+
+---
+
+- Dot notation is OK!
+
+```jsx
+<Foo.Bar />
+```
+
+- Computed JSX tags
+
+```jsx
+// No
+<foo[type] />
+<Foo[type] />
+
+// Yes!
+const Custom = foo[type];
+<Custom />
+```
+
+---
+
+# JSX Expressions
+
+<Notes>
+
+- React.creatElement() is an expression;
+
+(An expression is any valid unit of code that resolves to a value. Anything valid on RHS of "=")
+
+</Notes>
+
+---
+
+# JSX Expressions
+
+```jsx
+const element = <h1>Hello, Mary Poppings</h1>;
+```
+
+```jsx
+const name = 'Mary Poppins';
+const element = <h1>Hello, {name}</h1>;
+```
+
+<Notes>
+
+- How do we make the content dynamic?
+- declare var and wrap inside `{}` braces
+- ANY valid JS expression can be placed inside these braces!!
+
+</Notes>
+
+---
+
+TODO: Fix LiveCode snippets
+
+---
+
+TODO
+
+<Notes>
+
+- JSX can be used as direct expressions themselves
+- Assign your componet to variables!
+- This will prove powerful when we get deeper into components
+
+- How about passing data?
+
+</Notes>
+
+---
+
+# JSX attributes
+
+```jsx
+const element = <div tabIndex="0"></div>;
+const element = <img src={user.avatarUrl}></img>;
+```
+
+or
+
+```jsx
+const element = <div tabIndex="0" />;
+const element = <img src={user.avatarUrl} />;
+```
+
+```jsx
+const element = <div className="foo-bar" />;
+```
+
+<Notes>
+
+- attributes wrapped in either quotes, or curly braces
+- curly braces for allowing JS expressions
+- Elements should always have closing tags!
+- JSX is closer to JS than HTML, so valid DOM attributes should be camelCased
+- Attributes also serve us for passing data to "Components", see later
+
+</Notes>
+
+---
+
+# Nested JSX children
+
+```jsx
+const element = (
+  <div>
+    <h1>Hello.</h1>
+    <h2>Welcome to the JSX party!</h2>
+  </div>
+);
+```
+
+<Notes>
+
+- JSX statements don't have to be singular
+- JSX elements can contain multiple children!
+- JSX automatically escapes dynamic variables; prevents XSS
+- All JSX expresions, can be combined inside the children JSX nodes
+- Parentheses are important: Prevent ASI
+
+- How do we get this to the browser
+
+</Notes>
+
+---
+
+# Rendering JSX Elements
+
+We need somewhere on a page to tell ReactJS where to `mount` our ReactJS tree
+
+```jsx
+<div id="root"></div>
+```
+
+Tell ReactJS what + where to render.
+
+```jsx
+import ReactDOM from 'react-dom';
+
+const element = <h1>Hello, world</h1>;
+
+ReactDOM.render(element, document.getElementById('root'));
+```
+
+<Notes>
+
+- elements are the building blocks of UI in React
+  -- smallest blocks that can be made; NOT components (later)
+- Elements are plain JS objects; they're CHEAP to make; React handles the expensive bit
+
+- ReactJS elements a IMMUTABLE
+  -- Any change to an element, destroys the whole element (and it's children)!
+
+</Notes>
+
+---
+
+# React Components
+
+Let's define our own UI elements
+
+---
+
+## JS Function
+
+```jsx
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+
+## ES6 Class (_legacy_)
+
+```jsx
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
+<Notes>
+
+- Isolated, reusable building blocks
+- Think in isolation
+
+- props are the ATTRIBUTES passed to the componet
+- ReactJS makes these available for us
+- Convention is to call them `props`
+- Anytime a `prop` changes, a re-render is issued
+
+- Both are the same to ReactJS
+- Classes have more features, but that is later
+
+</Notes>
+
+---
+
+<!-- // import { renderingComponentsA } from './static/snippets/LiveCodeExamples'; -->
+
+# Rendering Components
+
+<!-- <LiveCodeEditor {...renderingComponentsA} /> -->
+
+<Notes>
+
+- Only seen ReactJS Elements so far
+- Custom component names have to be upper case!
+- We are not limited to use 1 component once
+- Not singletons
+
+</Notes>
+
+---
+
+<!-- // import { renderingComponentsB } from './static/snippets/LiveCodeExamples'; -->
+
+## Component Composition
+
+<!-- <LiveCodeEditor {...renderingComponentsB} /> -->
+
+<Notes>
+
+- Components can refer to other components
+- In larger Apps, don't be afraid to extract into smaller components
+
+</Notes>
+
+---
+
+# Component Props
+
+- Read only
+- `camelCase` naming convention
+- No limitation on types / names <small className="text-2xl">(don't clash with DOM API)</small>
+
+<Appear>
+
+<Callout>
+  All React components must act like pure functions, with respect to their
+  props.
+</Callout>
+
+</Appear>
+
+<Notes>
+
+- Output must only depend on the input
+- We'll learn how to get round this when we look at Class components / state
+
+</Notes>
+
+---
+
+<!-- // export default Invert; -->
+
+# Exercise Setup
+
+[https://github.com/tgallacher/reactjs-workshop](https://github.com/tgallacher/reactjs-workshop)
+
+_You'll need **2 terminal windows**_
+
+```sh
+yarn install
+# Separate termianl
+yarn server
+# Separate termianl
+yarn start
+```
+
+<Notes>
+
+- Docker is simpler, but can send SB-OSX crazy
+- NPM should be preferred
+
+</Notes>
+
+---
+
+# Exercise Set #1
+
+<small>ReactJS Elements + Components</small>
+
+<Callout>
+  <strong>Do not</strong> delete solutions; we'll need them later!
+</Callout>
+
+<Notes>
+
+- Checkout new branch with your name
+- DO N0T delete your solutions; we'll need them again!!!!
+
+</Notes>
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  State, Lifecycle, & Handling Events
+|
+--------------------------------------------------------- -->
+
+# State, Lifecycle & Event Handling
+
+TODO: Add hooks
+
+---
+
+# Class Components: Component State
+
+---
+
+```jsx
+class Foo extends React.Component {
+  constructor(props) {
+    super(props); // Important!
+
+    this.state = {
+      bar: 'baz',
+    };
+  }
+
+  render() {
+    return null;
+  }
+}
+```
+
+<Notes>
+
+- Avoid copying props to state; future prop updates are ignored
+  -- Only do so if the prop is the initial state == call the prop "initialFoo"..
+
+</Notes>
+
+---
+
+```jsx
+class Foo extends React.Component {
+  state = {
+    bar: 'baz',
+  };
+
+  render() {
+    return null;
+  }
+}
+```
+
+<Notes>
+
+- ESnext Proposal: (Stage 3) - Class properties
+
+- If mount time is the only time to set this.state, how do you update?
+
+</Notes>
+
+---
+
+```js
+this.setState({ bar: 'foobar' });
+```
+
+```js
+// Can't do this!
+this.setState({
+  bar: this.state.bar + this.prop.foo,
+});
+```
+
+```js
+// Do this instead
+this.setState((prevState, props) => ({
+  bar: prevState.bar + props.foo,
+}));
+```
+
+<Notes>
+
+- State updates are (shallow) merged - don't need to include all state
+- `this.state` is async
+
+- State is private; fully encapsulated
+- Other components don't know about it; of a component is state-less/ful
+- Can only pass props
+
+-> Unidirectional data flow!
+
+- Can only affect components below in tree
+- How to do updates once state been updated?
+
+</Notes>
+
+---
+
+```js
+this.setState(updater, callback);
+```
+
+<Notes>
+
+- callback invoked directly after state has been updated
+- Pref. though is to use a `componentDidUpdate()`, which is a "lifecycle" method...
+
+</Notes>
+
+---
+
+import LifecycleImg from './static/images/react-component-lifecycle-methods.png';
+
+# Component Lifecycle
+
+<img src={LifecycleImg} alt="Lifecycle Img" />
+
+---
+
+```js
+class Foo extends React.Component {
+  constructor() {}
+
+  render() {}
+
+  shouldComponentUpdate() {}
+
+  componentWillUnmount() {}
+
+  getSnapshotBeforeUpdate() {}
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  static getDerivedStateFromProps() {}
+
+  componentDidCatch() {}
+
+  static getDerivedStateFromError() {}
+}
+```
+
+<Notes>
+
+- Lots of lifecycle methods
+- We'll not discuss all of them, some are for edge case usage
+
+</Notes>
+
+---
+
+```js
+class Foo extends React.Component {
+  constructor() {}
+
+  render() {}
+
+  // shouldComponentUpdate() {}
+
+  componentWillUnmount() {}
+
+  // getSnapshotBeforeUpdate() {}
+
+  componentDidMount() {}
+
+  componentDidUpdate() {}
+
+  // static getDerivedStateFromProps() {}
+
+  // componentDidCatch() {}
+
+  // static getDerivedStateFromError() {}
+}
+```
+
+---
+
+### constructor() <small>_optional_</small>
+
+- mount phase
+- Call `super(props)`
+- Initialise state
+- Bind event handlers
+
+<Notes>
+
+- 'mount' => inserting into DOM tree
+- Don't call setState()
+- only place you can call this.state directly
+- NO side effects here!!!
+
+</Notes>
+
+---
+
+### componentDidMount() <small>_optional_</small>
+
+- Invoked immediately after mounting
+- Initialisers requiring DOM should be done here
+- (Async) side-effects here
+- setState() is ok here
+
+<Notes>
+
+- Side effects: load data, subscriptions, etc
+- Use setState pattern here sparingly, can cuase PERFORMANCE hits
+  -- Also triggers extra render (non-visible)
+
+</Notes>
+
+---
+
+### render()
+
+- Should be **pure**!
+
+<div className="text-left text-5xl my-6">Valid returns:</div>
+
+- React Element (`<div />`, `<Foo />`, etc.)
+- Arrays, _Fragments_
+- _Portals_
+- Text node (string, number)
+- Boolean or null
+
+<Notes>
+
+- Side effects: load data, subscriptions, etc
+- Use setState pattern here sparingly, can cuase PERFORMANCE hits
+  -- Also triggers extra render (non-visible)
+
+</Notes>
+
+---
+
+### componentDidUpdate() <small>_optional_</small>
+
+- Invoked immediately after (prop/state) update
+- DOM available
+- (Async) side-effects here (_wrapped in conditional_)
+- setState() is ok here (_wrapped in conditional_)
+
+<Notes>
+
+- Side effects: load data, subscriptions, etc
+- Side-effects need conditional otherwise infite loop!!
+
+</Notes>
+
+---
+
+### componentWillUnmount() <small>_optional_</small>
+
+- Invoked immediately before component unmount/destruction
+- Cleanup subscriptions, cancel network requests, timers, etc
+- `setState()` is a no-no!
+
+<Notes>
+
+- `setState()` => Component never re-rendered
+
+</Notes>
+
+---
+
+# Event Handlers
+
+---
+
+## DOM Event Handlers
+
+- Mouse events - <small><em>mousemove, click, ...</em></small>
+- touch events - <small><em>touchstart, touchmove, ...</em></small>
+- keyboard events - <small><em>keydown, keypress, ...</em></small>
+- form events - <small><em>change, blur, ...</em></small>
+- window events - <small><em>scroll, resize, ...</em></small>
+
+[https://developer.mozilla.org/en-US/docs/Web/Events](https://developer.mozilla.org/en-US/docs/Web/Events)
+
+<Notes>
+
+- Too many; some common ones listed
+- We can 'listen' and do stuff
+
+- In JSX,
+  -- event handlers are camelCased
+  -- callbacks are functions, not strings referring to fns (c.f. HTML)
+  -- cannot return `false` to prevent def. behaviour; need `e.preventDefault()`
+
+- Pick `click` event; how do we set that up
+
+</Notes>
+
+---
+
+```jsx
+class Foo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    // do something
+  }
+
+  render() {
+    return <button onClick={this.handleClick}>Update</button>;
+  }
+}
+```
+
+<Notes>
+
+- Can leverage bubbling; but a11y
+- Only need to bind if need access to `this` (you usually do)
+
+- Could use class properties
+- Don't do inline function defn in `render()`
+
+</Notes>
+
+---
+
+# Exercise Set #2
+
+<small>State, Lifecycle, & Handling Events</small>
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  Conditional Rendering
+|
+--------------------------------------------------------- -->
+
+# Conditional Rendering
+
+---
+
+```jsx
+function Greeting(props) {
+  if (props.isLoggedIn) {
+    return <UserGreeting />;
+  }
+
+  return <GuestGreeting />;
+}
+```
+
+<Notes>
+
+- JSX expresions: assign elements to vars for later use!
+- JSX helps enforce semantic blocks
+
+</Notes>
+
+---
+
+```jsx
+class LoginControl extends React.Component {
+  ...
+  render() {
+    let button = <LoginButton onClick={this.handleLoginClick} />;
+
+    if (this.state.isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    }
+
+    return (
+      <div>
+        <h1>Account</h1>
+
+        ...
+
+        {button}
+      </div>
+    )
+  }
+}
+```
+
+<Notes>
+
+- Shorter way to do this...
+  -- ternary operator
+
+</Notes>
+
+---
+
+```jsx
+render() {
+  const { isLoggedIn } = this.state;
+
+  return (
+    <div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+    </div>
+  );
+}
+```
+
+<Notes>
+
+- Taking our example from before then...
+
+</Notes>
+
+---
+
+```jsx
+render() {
+  const { isLoggedIn } = this.state;
+
+  return (
+    <div>
+      <h1>Account</h1>
+
+      ...
+
+      {isLoggedIn
+        ? (
+          <LogoutButton onClick={this.handleLogoutClick} />
+        )
+        : (
+          <LoginButton onClick={this.handleLoginClick} />
+        )
+      }
+    </div>
+  )
+}
+```
+
+<Notes>
+
+in JS we also have inline `if` using && logical operator
+
+- true && expr => expr
+- false && expr => false
+
+</Notes>
+
+---
+
+```jsx
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+
+  return (
+    <div>
+      <h1>Hello!</h1>
+
+      {unreadMessages.length > 0 && (
+        <h2>You have {unreadMessages.length} unread messages.</h2>
+      )}
+    </div>
+  );
+}
+```
+
+<Notes>
+
+- true && expr => expr
+- false && expr => false
+
+- And just becuase we have a component defined in our JSX,
+  doesn't mean it has to output to the screen...
+
+</Notes>
+
+---
+
+## Prevent output
+
+```jsx
+function WarningBanner(props) {
+  if ( ! props.warn) return null;
+
+  return (
+    <div className="warning">
+      {props.message}
+    </div>
+  );
+}
+
+function Page(props) {
+  ...
+  return (
+    <section>
+      <WarningBanner warn={props.hasWarning} message={props.warningMessage} />
+      <button onClick={props.handleClick}>Toggle</button>
+    </section>
+  );
+}
+```
+
+---
+
+# Exercise Set #3
+
+<small>Conditional Rendering</small>
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  Lists & Keys
+|
+--------------------------------------------------------- -->
+
+# Lists & Keys
+
+---
+
+```js
+Array.prototype.map
+Array.prototype.filter
+Array.prototype.find
+Array.prototype.sort
+...
+```
+
+<Notes>
+
+- Remember, it's still JS
+
+</Notes>
+
+---
+
+```jsx
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map(number => <li>{number}</li>);
+
+return <ul>{listItems}</ul>;
+```
+
+<Notes>
+
+- simple, clean
+- But wait; this is inefficient: need to add `key`
+
+</Notes>
+
+---
+
+# I've got the key...
+
+```jsx
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map(number => (
+  <li key={number.toString()}>{number}</li>
+));
+
+return <ul>{listItems}</ul>;
+```
+
+<Notes>
+
+- reconciliation
+- should be uniq within scope of parent node containing array (siblings), not global
+- Use index as last resort; but not great
+- React defaults to index if none provided
+
+- KEY: the key should be added to the surrounding array
+
+</Notes>
+
+---
+
+## Wrong key
+
+```jsx
+function ListItem(props) {
+  const value = props.value;
+  return (
+    // Wrong! There is no need to specify the key here:
+    <li key={value.toString()}>{value}</li>
+  );
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  // Wrong! The key should have been specified here:
+  const listItems = numbers.map(number => <ListItem value={number} />);
+
+  return <ul>{listItems}</ul>;
+}
+```
+
+<Notes>
+
+- The `key` attribute is internal to React
+- correct usage is actually...
+
+</Notes>
+
+---
+
+## Correct key
+
+```jsx
+function ListItem(props) {
+  // Correct! There is no need to specify the key here:
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map(number => (
+    // Correct! Key should be specified inside the array.
+    <ListItem key={number.toString()} value={number} />
+  ));
+  return <ul>{listItems}</ul>;
+}
+```
+
+<Notes>
+
+- this also applies to React.Fragments
+- And finally, more concise syntax using JSX expressions
+
+</Notes>
+
+---
+
+## Shorthand
+
+```jsx
+function NumberList(props) {
+  const numbers = props.numbers;
+
+  return (
+    <ul>
+      {numbers.map(number => (
+        <ListItem key={number.toString()} value={number} />
+      ))}
+    </ul>
+  );
+}
+```
+
+<Notes>
+
+- Obviously, doesn't include checking we have an array...
+
+</Notes>
+
+---
+
+# Exercise Set #4
+
+<small>Lists & Keys</small>
