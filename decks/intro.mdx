@@ -1,0 +1,157 @@
+import { Head } from 'gatsby-theme-mdx-deck';
+import { Link } from 'gatsby';
+
+<Head>
+  <title>ReactJS Workshop | Intro</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i&display=swap" rel="stylesheet" />
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" crossOrigin="anonymous" />
+</Head>
+
+# Preface
+
+<Notes>
+
+Housekeeping
+
+- lunch
+- coffee breaks
+- Interactive; not strict schedule
+  -- Goal is to learn something;
+- Shout out questions at any time
+
+</Notes>
+
+---
+
+# First...
+
+Introductions
+
+<Emoji className="em-wave" />
+
+<Notes>
+
+- Name + team
+- Groups of x3 ppl (x1 with experience)
+
+</Notes>
+
+---
+
+# Pre-requisites
+
+- HTML &amp; CSS
+- DOM basics
+- ECMAScript5 fundamentals
+- ECMAScript2015+ exposure\*
+- <Div sx={{ fontStyle: 'italic' }}>
+    <Div sx={{ color: 'green', display: 'inline' }}>
+      node (<small>LTS</small>)
+    </Div>{' '}
+    &amp; <Div sx={{ color: 'green', display: 'inline' }}>npm</Div> installed
+  </Div>
+
+<Notes>
+
+- \*ES6 is not the focus, but we'll highlight/introduce concepts as they appear
+- brew install node
+- Git obviously
+
+</Notes>
+
+---
+
+# Objective
+
+Introduce ReactJS and explore key concepts / patterns.
+
+<Notes>
+
+- Take something away
+- Make sure and ask questions; steer the conversation
+- Call out key concepts/terms to help offline learning
+
+</Notes>
+
+---
+
+# Session Structure
+
+```
+1 hour = 20 mins + 40 mins
+```
+
+<Notes>
+
+- general approximate guide
+- No requirement on actual guide
+
+</Notes>
+
+---
+
+# Structure
+
+<Appear>
+
+<Div sx={{ my: 4, textAlign: 'center' }}>
+  <Div sx={{ color: 'purple', fontWeight: 'bold', mb: 4, fontSize: 6 }}>
+    Day 1: ReactJS Foundations
+  </Div>
+  <Div sx={{ fontSize: 5 }}>
+    Introduction to ReactJS, basics of ReactJS & how to <em>think</em> in
+    ReactJS
+  </Div>
+</Div>
+
+<Div sx={{ my: 4, textAlign: 'center' }}>
+  <Div sx={{ color: 'purple', fontWeight: 'bold', mb: 4, fontSize: 6 }}>
+    Day 2: Intermediate/Advanced ReactJS
+  </Div>
+  <Div sx={{ fontSize: 5 }}>
+    Introduction to component design partterns, APIs & how to solve common
+    problems
+  </Div>
+</Div>
+
+</Appear>
+
+<Notes>
+
+- This how I think it _MIGHT_ go
+- Up to audience how it actually goes
+- Want to allow time for newer ReactJS users to get a change to understand key concepts
+- Left "breakthing" space for discussions / bug fixing
+
+</Notes>
+
+---
+
+import exampleAppImg from './static/images/example-app.png';
+
+# What will we build?
+
+<Appear>
+
+<img
+  src={exampleAppImg}
+  width="75%"
+  alt="SPA app that will built during the workshop"
+/>
+
+</Appear>
+
+<Notes>
+
+- Try to keep SB context - easier to apply after these sessions
+- DEMO app and basic functionality
+
+http://localhost:6006/?selectedKind=Demo%20App%2FApp&selectedStory=App&full=0
+
+</Notes>
+
+---
+
+<Link to="/">Home</Link>

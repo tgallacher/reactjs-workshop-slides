@@ -4,29 +4,34 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
+import ReactIcon from '../../../decks/static/images/react-icon.svg';
+import ReactSpinner from '../../components/SpinReactLogo';
+
+// TODO: Control oder of this list..
+const makeLinkToSlide = decks => props => {
+  const title = decks.find(d => d.slug === props.slug).title || props.slug;
+
+  return (
+    <Styled.li>
+      <Styled.a as={Link} to={props.slug} title={title}>
+        {title}
+      </Styled.a>
+    </Styled.li>
+  );
+};
+
 export default ({ pageContext, ...props }) => {
   const decks = pageContext.decks.map(d => d.node);
-
-  console.log(decks);
+  const LinkToSlide = makeLinkToSlide(decks);
 
   return (
     <React.Fragment>
       <Helmet title="ReactJS Workshop | Tom Gallacher">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
+          href="https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i&display=swap"
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Mansalva&display=swap"
         />
-        {/* <link
-          href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-          rel="stylesheet"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://afeld.github.io/emoji-css/emoji.css"
-          rel="stylesheet"
-          crossOrigin="anonymous"
-        /> */}
       </Helmet>
 
       <div
@@ -42,20 +47,21 @@ export default ({ pageContext, ...props }) => {
           fontFamily: 'body',
         }}
       >
-        <Styled.h1>
-          ReactJS Workshop
-          <Styled.p sx={{ fontStyle: 'italic', fontSize: 3 }}>
-            (2 days)
-          </Styled.p>
-        </Styled.h1>
-        <div className="text italic">Tom Gallacher, Ph.D</div>
+        <ReactSpinner width="512px" src={ReactIcon} />
 
-        <div
+        <Styled.h1>ReactJS Workshop</Styled.h1>
+        <Styled.p sx={{ fontStyle: 'italic', fontSize: 2, mt: -6 }}>
+          (2 days)
+        </Styled.p>
+        <Styled.p sx={{ fontStyle: 'italic', fontSize: 3 }}>
+          Tom Gallacher, Ph.D
+        </Styled.p>
+
+        <section
           sx={{
             bg: 'muted',
             display: 'flex',
             flexDirection: 'row',
-            // flex: '1 0 auto',
             py: 4,
             px: 6,
             mt: 6,
@@ -63,7 +69,7 @@ export default ({ pageContext, ...props }) => {
         >
           <Styled.ul>
             {/* TODO: Control oder of this list.. */}
-            {decks.reverse().map(deck => (
+            {/* {decks.reverse().map(deck => (
               <Styled.li key={deck.id}>
                 <Styled.a
                   as={Link}
@@ -73,9 +79,12 @@ export default ({ pageContext, ...props }) => {
                   {deck.title || deck.slug}
                 </Styled.a>
               </Styled.li>
-            ))}
+            ))} */}
+            <LinkToSlide slug="/intro" />
+            <LinkToSlide slug="/day-1" />
+            <LinkToSlide slug="/day-2" />
           </Styled.ul>
-        </div>
+        </section>
       </div>
     </React.Fragment>
   );
