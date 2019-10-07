@@ -1,0 +1,349 @@
+import { Head } from 'gatsby-theme-mdx-deck';
+import ReactIcon from './static/images/react-icon.svg';
+
+<Head>
+  <title>ReactJS Workshop</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i&display=swap" rel="stylesheet" />
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" crossOrigin="anonymous" />
+</Head>
+
+# Bonus: CSS-in-JS
+
+---
+
+<!-- --------------------------------------------------------
+|
+|  CSS-in-JS
+|
+--------------------------------------------------------- -->
+
+# CSS-in-JS
+
+---
+
+# CSS - in - JS
+
+Javascript +️ CSS = JSS
+
+<Appear>
+
+  <Emoji className="em-face_vomiting" />
+  <Emoji className="em-neutral_face" />
+  <Emoji className="em-gun" />
+
+</Appear>
+
+---
+
+# CSS-in-JS: Why?
+
+- Power of JS
+- Extensible plugin architecture (_automation_, _vendor prefixing_)
+- More powerful than inline styles
+- Thinking in components (_style abstraction_)
+- True scoped/namespaced selectors
+- Cross concern code sharing (JS <-> CSS)
+- Dead code elimination
+- CSS unit tests
+
+<Notes>
+
+Inline styles
+
+- don't support pseudo classes, media queries
+- can't style `html`, `body` tags
+  With JSS
+- You get all this
+- & SCSS like functionality (nested self reference selectors)
+
+Abstraction
+
+- @ component level, not document
+- true rule isolation (plugin) - some CSS auto inherits from parents, event if not defined
+
+CSS Modules
+
+- hybrid approach
+- Auto namespace styles based on file name
+- access in js like object
+
+</Notes>
+
+---
+
+# Cons
+
+- Learning curve
+- New dependencies
+- Harder to adopt for newer team members (more to learn)
+
+---
+
+# Many JSS options
+
+- Styled components
+- jss
+- Aphrodite
+- ~~Glamorous~~
+- Styletron
+- Emotion
+- ...
+
+---
+
+# Emotion JS
+
+<img
+  className="my-10"
+  width="256"
+  alt="emotion js"
+  src="https://camo.githubusercontent.com/209bdea972b9b6ef90220c59ecbe66d35ffefa8a/68747470733a2f2f63646e2e7261776769742e636f6d2f746b6834342f656d6f74696f6e2f6d61737465722f656d6f74696f6e2e706e67"
+/>
+
+[https://emotion.sh/](https://emotion.sh/)
+
+<Notes>
+
+- hybrid of styled-components and `glamorous`
+- Extensive API; we'll cover a small part
+
+- what does it look like
+
+</Notes>
+
+---
+
+# Styling API options
+
+- Object
+- String
+- Classname manipulation
+- With or without React bindings
+
+---
+
+# Target style
+
+```css
+.selector {
+  background-color: #0874da;
+  color: white;
+}
+
+.selector:hover {
+  background-color: #3482df;
+  color: pink;
+}
+```
+
+<Notes>
+
+I guessed these...
+
+</Notes>
+
+---
+
+## Object styling API
+
+```js
+import { css } from 'emotion';
+
+const selector = css({
+  'backgroundColor': '#0874da',
+  'color': 'white',
+  '&:hover': {
+    backgroundColor: '#3482df',
+    color: 'pink',
+  },
+});
+```
+
+---
+
+## String styling API
+
+```js
+import { css } from 'emotion';
+
+const selector = css`
+  background-color: #0874da;
+  color: white;
+
+  &:hover {
+    background-color: #3482df;
+    color: pink;
+  }
+`;
+```
+
+<!-- prettier-ignore-start -->
+
+<Notes>
+
+- The 1st one is painful
+  - esp. if converting legacy css...
+- 2nd is way cleaner (to me)
+
+- How about injecting variables so its dynamic...?
+
+</Notes>
+
+<!-- prettier-ignore-end -->
+
+---
+
+## Object styling API: Dynamic
+
+<Callout>
+
+Note: This is now a deprecated API!
+
+TODO: Update to Emotion v10
+
+</Callout>
+
+```js
+import { css } from 'emotion';
+
+const selector = props =>
+  css({
+    'backgroundColor': props.bgColor,
+    'color': 'white',
+    '&:hover': {
+      backgroundColor: '#3482df',
+      color: 'pink',
+    },
+  });
+```
+
+<Notes>
+
+- This is react specific;
+- expect to use with `styled`
+- This helps breakdown/reuse styling
+
+</Notes>
+
+---
+
+## String styling API: Dynamic
+
+<Callout>
+
+Note: This is now a deprecated API!
+
+TODO: Update to Emotion v10
+
+</Callout>
+
+```js
+import { css } from 'emotion';
+
+const selector = props => css`
+  background-color: ${props.bgColor};
+  color: white;
+
+  &:hover {
+    background-color: #3482df;
+    color: pink;
+  }
+`;
+```
+
+<Notes>
+
+- This is react specific;
+- expect to use with `styled`
+- This helps breakdown/reuse styling
+
+</Notes>
+
+---
+
+## React-Emotion
+
+<Callout>
+
+Note: This is now a deprecated API!
+
+TODO: Update to Emotion v10
+
+</Callout>
+
+```jsx
+import styled from 'react-emotion';
+
+const StyledCDiv = styled.div`
+  background-color: ${props => props.bgColor};
+  color: white;
+
+  &:hover {
+    background-color: #3482df;
+    color: pink;
+  }
+`;
+
+const Foo = () => (
+  <div>
+    <StyledDiv>Funky text</StyledDiv>
+  </div>
+);
+```
+
+<Notes>
+
+Finally, cx
+
+</Notes>
+
+---
+
+# Dynamic classNames
+
+<Callout sx={{ mt: -6 }}>
+
+Note: This is now a deprecated API!
+
+TODO: Update to Emotion v10
+
+</Callout>
+
+```jsx
+import { cx } from 'emotion';
+
+const Foo = () => (
+  <div
+    className={cx(
+      'im-included',
+      'me-too',
+      {
+        'me-too-too': true,
+        'not-me': false,
+      },
+      'i-am-though',
+    )}
+  >
+    funky content..
+  </div>
+);
+```
+
+<Notes>
+
+- Powerful
+- now we can manipulate styling related to state/props
+- it's all colocated
+- it can be powerd by plugins to automate/transform...
+
+</Notes>
+
+---
+
+# Exercise Set #5
+
+<small>CSS-in-JSS</small>
+
+---
