@@ -51,10 +51,7 @@ export default ({ pageContext, ...props }) => {
         <ReactSpinner width="512px" src={ReactIcon} />
 
         <Styled.h1>ReactJS Workshop</Styled.h1>
-        <Styled.p sx={{ fontStyle: 'italic', fontSize: 2, mt: -6 }}>
-          (2 days)
-        </Styled.p>
-        <Styled.p sx={{ fontStyle: 'italic', fontSize: 3 }}>
+        <Styled.p sx={{ fontStyle: 'italic', fontSize: 4, mt: -5 }}>
           Tom Gallacher, Ph.D
         </Styled.p>
 
