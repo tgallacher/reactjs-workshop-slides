@@ -84,6 +84,7 @@ export default ({ pageContext, ...props }) => {
             <LinkToSlide slug="/intro" />
             <LinkToSlide slug="/day-1" />
             <LinkToSlide slug="/day-2" />
+            <LinkToSlide slug="/bonus-css-in-js" />
           </Styled.ul>
         </section>
       </div>
