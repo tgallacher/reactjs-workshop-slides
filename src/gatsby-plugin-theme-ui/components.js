@@ -16,32 +16,7 @@ import { Link } from 'gatsby';
 import ReactSpinner from '../components/SpinReactLogo.jsx';
 // import Callout from '../components/Callout.jsx';
 
-const Emoji = ({ className, sx, ...props }) => (
-  <div
-    sx={{ mt: 4, fontSize: 6, ...sx }}
-    className={'em '.concat(className)}
-    {...props}
-  />
-);
-
-const Callout = ({ sx, ...props }) => (
-  <div
-    sx={{
-      borderWidth: 0,
-      borderLeftColor: 'secondary',
-      borderLeftWidth: 6,
-      borderStyle: 'solid',
-      backgroundColor: 'muted',
-      p: 4,
-      mt: 4,
-      fontWeight: 'bold',
-      ...sx,
-    }}
-    {...props}
-  />
-);
-
-const Div = ({ sx, ...props }) => <div sx={sx} {...props} />;
+const StyledEditor = styled(LiveEditor)(prismStyle);
 
 export default {
   Link,
@@ -58,9 +33,30 @@ export default {
   // Shortcodes
   //
   ReactSpinner,
-  Callout,
-  Emoji,
-  Div,
+  Callout: ({ sx, ...props }) => (
+    <div
+      sx={{
+        borderWidth: 0,
+        borderLeftColor: 'secondary',
+        borderLeftWidth: 6,
+        borderStyle: 'solid',
+        backgroundColor: 'muted',
+        p: 4,
+        mt: 4,
+        fontWeight: 'bold',
+        ...sx,
+      }}
+      {...props}
+    />
+  ),
+  Emoji: ({ className, sx, ...props }) => (
+    <div
+      sx={{ mt: 4, fontSize: 6, ...sx }}
+      className={'em '.concat(className)}
+      {...props}
+    />
+  ),
+  Div: ({ sx, ...props }) => <div sx={sx} {...props} />,
   ReactLive: props => (
     <LiveProvider code={props.code.trim()} noInline={true}>
       <StyledEditor />

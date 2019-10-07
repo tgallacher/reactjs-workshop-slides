@@ -2,60 +2,45 @@
  * Live Code examples
  */
 
-
 //
 // JSX EXPRESSIONS
 //
 
-export const jsxExpressionsA = {
-  noInline: true,
-  code: (`
+export const jsxExpressionsA = `
 const element = <h1>Hello, Mary Poppins</h1>;
 
 render(element)
-`).trim(),
-};
+`.trim();
 
-export const jsxExpressionsB = {
-  noInline: true,
-  code: (`
+export const jsxExpressionsB = `
 const name = 'Mary Poppins';
 const element = <h1>Hello, {name}</h1>;
 
 render(element)
-`).trim(),
-};
+`.trim();
 
-export const jsxExpressionsC1 = {
-  noInline: true,
-  code: (`
-  const element = (
+export const jsxExpressionsC1 = `
+  render(
   <h1>
     Time: {(new Date().toLocaleTimeString('en-US'))}
   </h1>
 );
+`.trim();
 
-render(element)
-`).trim(),
-};
-
-export const jsxExpressionsC2 = {
-  noInline: true,
-  code: (`
+export const jsxExpressionsC2 = `
 const getName = () => 'Harry Potter';
+
 const element = (
   <h1>
     Hello, {getName()}
   </h1>
 );
 
-render(element)
-`).trim(),
-};
 
-export const jsxExpressionsC3 = {
-  noInline: true,
-  code: (`
+render(element)
+`.trim();
+
+export const jsxExpressionsC3 = `
 const element = (
   <h1>
     {6 > 4
@@ -65,12 +50,9 @@ const element = (
 );
 
 render(element)
-`).trim(),
-};
+`.trim();
 
-export const jsxExpressionsD = {
-  noInline: true,
-  code: (`
+export const jsxExpressionsD = `
 function greetUser(isLoggedIn, username){
   if (isLoggedIn) {
     return <h1>Hello, {username}</h1>;
@@ -80,16 +62,13 @@ function greetUser(isLoggedIn, username){
 }
 
 render(greetUser(false, undefined))
-`).trim(),
-};
+`.trim();
 
 //
 // RENDERING COMPONENTS
 //
 
-export const renderingComponentsA = {
-  noInline: true,
-  code: (`
+export const renderingComponentsA = `
 function Welcome(props){
   return <h1>Hello, {props.name}</h1>;
 }
@@ -97,12 +76,9 @@ function Welcome(props){
 render(
   <Welcome name="Mary" />
 );
-`).trim(),
-};
+`.trim();
 
-export const renderingComponentsB = {
-  noInline: true,
-  code: (`
+export const renderingComponentsB = `
 function Welcome(props){
   return <h1>Hello, {props.name}</h1>;
 }
@@ -120,5 +96,4 @@ function App(){
 render(
   <App />
 );
-`).trim(),
-};
+`.trim();

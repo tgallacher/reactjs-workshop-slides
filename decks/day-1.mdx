@@ -47,10 +47,14 @@ Composable / Modular
 
 # Virtual DOM
 
+<!-- prettier-ignore-start -->
+
+
 - _Virtual_ representation of the UI kept in-memory
 - Sync with the _real_ DOM
-- <span className="text-purple">React Fiber</span> &
-  <span className="text-green">Reconciliation</span>
+- <Div sx={{ display: 'inline-block', color: 'purple' }}>React Fiber</Div> & <Div sx={{ display: 'inline-block', color: 'green' }}>Reconciliation</Div>
+
+<!-- prettier-ignore-end -->
 
 <Notes>
 
@@ -70,48 +74,115 @@ Composable / Modular
 
 ---
 
-### Virtual DOM
+## Virtual DOM
 
 <!-- ReactIcon is defined at top of file -->
 
 <ReactSpinner width="512px" src={ReactIcon} />
 
-<div className="inline-block mx-8 rounded bg-green-light text-green-darker p-2">
+<Div sx={{ display: 'flex', flexDirection: 'row', mt: 6 }}>
+
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   DOM
-</div>
+</Div>
 
 <Appear>
 
-<div className="inline-block mx-8 rounded bg-yellow-dark text-yellow-darker p-2">
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   VR / AR
-</div>
+</Div>
 
-<div className="inline-block mx-8 rounded bg-teal-light text-teal-darker p-2">
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   WebGL
-</div>
+</Div>
 
-<div className="inline-block mx-8 rounded bg-orange-light text-orange-darker p-2">
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   (Native) Mobile
-</div>
+</Div>
 
-<div className="inline-block mx-8 rounded bg-purple-light text-purple-darker p-2">
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   Sketch App
-</div>
+</Div>
 
-<div className="inline-block mx-8 rounded bg-pink-light text-pink-darker p-2">
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
   PDF
-</div>
+</Div>
 
-<div className="inline-block mx-8 rounded bg-indigo-light text-indigo-darker p-2">
-  <i className="em em-thinking_face" /> ??
-</div>
+<Div
+  sx={{
+    display: 'flex',
+    borderRadius: 6,
+    mx: 2,
+    color: 'green',
+    bg: 'muted',
+    p: 4,
+  }}
+>
+  <Emoji sx={{ m: 0, fontSize: 4 }} className="em-thinking_face" /> ??
+</Div>
 
 </Appear>
 
-<div className="mt-10">
-  <i className="text-5xl em em-man" />
-  <i className="text-5xl em em-woman" />
-</div>
+</Div>
+
+<Div sx={{ mt: 5 }}>
+  <Emoji className="em-man" />
+  <Emoji className="em-woman" />
+</Div>
 
 <Notes>
 
@@ -141,9 +212,16 @@ Composable / Modular
 
 # MVP React App
 
+<!-- prettier-ignore-start -->
+
 ```jsx
-ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);
 ```
+
+<!-- prettier-ignore-end -->
 
 <Notes>
 
@@ -167,7 +245,7 @@ ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById('root'));
 
 # Hello, JSX!
 
-Javascript +️ XML = JSX
+<span>Javascript +️ XML = JSX</span>
 
 <Appear>
 
@@ -177,14 +255,16 @@ Javascript +️ XML = JSX
 
 ---
 
+import { Split } from 'mdx-deck';
+
 ```jsx
-const element = <h1 id="my-id">Hello, world!</h1>;
+<h1 id="my-id">Hello, world!</h1>
 ```
 
 vs.
 
 ```js
-const element = React.creatElement('h1', { id: 'my-id' }, 'Hello, world!');
+React.creatElement('h1', { id: 'my-id' }, 'Hello, world!');
 ```
 
 <Notes>
@@ -272,17 +352,33 @@ const element = <h1>Hello, {name}</h1>;
 
 ---
 
-TODO: Fix LiveCode snippets
+import { jsxExpressionsC1 } from './static/snippets/liveCodeExamples';
+
+<ReactLive code={jsxExpressionsC1} />
 
 ---
 
-TODO
+import { jsxExpressionsC2 } from './static/snippets/liveCodeExamples';
+
+<ReactLive code={jsxExpressionsC2} />
 
 <Notes>
 
 - JSX can be used as direct expressions themselves
 - Assign your componet to variables!
 - This will prove powerful when we get deeper into components
+
+</Notes>
+
+---
+
+import { jsxExpressionsC3 } from './static/snippets/liveCodeExamples';
+
+<ReactLive code={jsxExpressionsC3} />
+
+<Notes>
+
+- We can also do conditionals (more later)
 
 - How about passing data?
 
@@ -292,10 +388,16 @@ TODO
 
 # JSX attributes
 
+---
+
+<!-- prettier-ignore-start -->
+
 ```jsx
 const element = <div tabIndex="0"></div>;
 const element = <img src={user.avatarUrl}></img>;
 ```
+
+<!-- prettier-ignore-end -->
 
 or
 
@@ -453,7 +555,7 @@ class Welcome extends React.Component {
 
 - Read only
 - `camelCase` naming convention
-- No limitation on types / names <small className="text-2xl">(don't clash with DOM API)</small>
+- No limitation on types / names <small><em>(don't clash with DOM API)</em></small>
 
 <Appear>
 
@@ -479,22 +581,17 @@ class Welcome extends React.Component {
 
 [https://github.com/tgallacher/reactjs-workshop](https://github.com/tgallacher/reactjs-workshop)
 
-_You'll need **2 terminal windows**_
-
 ```sh
 yarn install
-# Separate termianl
+
+# In a separate termianl
 yarn server
-# Separate termianl
+
+# In a separate termianl
 yarn start
 ```
 
-<Notes>
-
-- Docker is simpler, but can send SB-OSX crazy
-- NPM should be preferred
-
-</Notes>
+<Callout>You'll need 2 terminal windows</Callout>
 
 ---
 
@@ -542,17 +639,21 @@ class Foo extends React.Component {
   }
 
   render() {
-    return null;
+    return <h1>Hello {this.state.bar}</h1>;
   }
 }
 ```
 
+<!-- prettier-ignore-start -->
+
 <Notes>
 
 - Avoid copying props to state; future prop updates are ignored
-  -- Only do so if the prop is the initial state == call the prop "initialFoo"..
+  - Only do so if the prop is the initial state == call the prop "initialFoo"..
 
 </Notes>
+
+<!-- prettier-ignore-end -->
 
 ---
 
@@ -563,24 +664,57 @@ class Foo extends React.Component {
   };
 
   render() {
-    return null;
+    return <h1>Hello {this.state.bar}</h1>;
   }
 }
 ```
 
+<Callout>
+  * Currently ECMA proposal <em>(stage 3)</em>
+</Callout>
+
 <Notes>
 
 - ESnext Proposal: (Stage 3) - Class properties
-
 - If mount time is the only time to set this.state, how do you update?
 
 </Notes>
 
 ---
 
+## How do we update component state?
+
+Can't update state directly
+
+```js
+// Nope!
+this.state.bar = 'foobar';
+```
+
+Instead, ReactJS gives us an API:
+
 ```js
 this.setState({ bar: 'foobar' });
 ```
+
+<Notes>
+
+- State updates are (shallow) merged - don't need to include all state
+- `this.state` is async
+
+- State is private; fully encapsulated
+  - Other components don't know about it; of a component is state-less/ful
+- Can only pass props
+
+- Unidirectional data flow!
+  - Can only affect components below in tree
+- How to do updates once state been updated?
+
+</Notes>
+
+---
+
+## How about updating state based on previous state?
 
 ```js
 // Can't do this!
@@ -588,6 +722,8 @@ this.setState({
   bar: this.state.bar + this.prop.foo,
 });
 ```
+
+`setState` is **asynchronous**, so we use the other version of the API instead:
 
 ```js
 // Do this instead
@@ -598,30 +734,8 @@ this.setState((prevState, props) => ({
 
 <Notes>
 
-- State updates are (shallow) merged - don't need to include all state
-- `this.state` is async
-
-- State is private; fully encapsulated
-- Other components don't know about it; of a component is state-less/ful
-- Can only pass props
-
--> Unidirectional data flow!
-
-- Can only affect components below in tree
-- How to do updates once state been updated?
-
-</Notes>
-
----
-
-```js
-this.setState(updater, callback);
-```
-
-<Notes>
-
-- callback invoked directly after state has been updated
-- Pref. though is to use a `componentDidUpdate()`, which is a "lifecycle" method...
+- Any changes to props or state cause a re-render
+- This kicks in React's lifecycles
 
 </Notes>
 
@@ -694,7 +808,9 @@ class Foo extends React.Component {
 
 ---
 
-### constructor() <small>_optional_</small>
+### constructor()
+
+<Div sx={{ fontSize: 5, mt: -4, mb: 6, fontStyle: 'italic' }}>optional</Div>
 
 - mount phase
 - Call `super(props)`
@@ -712,7 +828,9 @@ class Foo extends React.Component {
 
 ---
 
-### componentDidMount() <small>_optional_</small>
+### componentDidMount()
+
+<Div sx={{ fontSize: 5, mt: -4, mb: 6, fontStyle: 'italic' }}>optional</Div>
 
 - Invoked immediately after mounting
 - Initialisers requiring DOM should be done here
@@ -733,7 +851,17 @@ class Foo extends React.Component {
 
 - Should be **pure**!
 
-<div className="text-left text-5xl my-6">Valid returns:</div>
+<Div
+  sx={{
+    fontSize: 5,
+    my: 3,
+    ml: -8,
+    fontWeight: 'bold',
+    color: 'purple',
+  }}
+>
+  Valid returns
+</Div>
 
 - React Element (`<div />`, `<Foo />`, etc.)
 - Arrays, _Fragments_
@@ -751,7 +879,9 @@ class Foo extends React.Component {
 
 ---
 
-### componentDidUpdate() <small>_optional_</small>
+### componentDidUpdate()
+
+<Div sx={{ fontSize: 5, mt: -4, mb: 6, fontStyle: 'italic' }}>optional</Div>
 
 - Invoked immediately after (prop/state) update
 - DOM available
@@ -767,7 +897,9 @@ class Foo extends React.Component {
 
 ---
 
-### componentWillUnmount() <small>_optional_</small>
+### componentWillUnmount()
+
+<Div sx={{ fontSize: 5, mt: -4, mb: 6, fontStyle: 'italic' }}>optional</Div>
 
 - Invoked immediately before component unmount/destruction
 - Cleanup subscriptions, cancel network requests, timers, etc
@@ -786,6 +918,8 @@ class Foo extends React.Component {
 ---
 
 ## DOM Event Handlers
+
+The Web (event) API is pretty big..
 
 - Mouse events - <small><em>mousemove, click, ...</em></small>
 - touch events - <small><em>touchstart, touchmove, ...</em></small>
@@ -819,11 +953,13 @@ class Foo extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Convent: `handle*`
   handleClick(event) {
     // do something
   }
 
   render() {
+    // `onClick` DOM API
     return <button onClick={this.handleClick}>Update</button>;
   }
 }
@@ -844,6 +980,12 @@ class Foo extends React.Component {
 # Exercise Set #2
 
 <small>State, Lifecycle, & Handling Events</small>
+
+---
+
+# Hooks
+
+<Emoji sx={{ fontSize: 8 }} className="em-fishing_pole_and_fish" />
 
 ---
 
@@ -899,16 +1041,43 @@ class LoginControl extends React.Component {
 }
 ```
 
+<!-- prettier-ignore-start -->
+
 <Notes>
 
 - Shorter way to do this...
-  -- ternary operator
+  - ternary operator
 
 </Notes>
 
+<!-- prettier-ignore-end -->
+
 ---
 
+### Simplify conditionals: Ternary operator
+
 ```jsx
+...
+
+render() {
+  const { isLoggedIn } = this.state;
+  const msg = isLoggedIn ? 'currently' : 'not';
+
+  return (
+    <div>
+      The user is <b>{msg}</b> logged in.
+    </div>
+  );
+}
+```
+
+---
+
+#### The ternary operator can be used inline:
+
+```jsx
+...
+
 render() {
   const { isLoggedIn } = this.state;
 
@@ -928,26 +1097,57 @@ render() {
 
 ---
 
+### So, We can simplify this:
+
 ```jsx
-render() {
-  const { isLoggedIn } = this.state;
+class LoginControl extends React.Component {
+  ...
+  render() {
+    let button = <LoginButton onClick={this.handleLoginClick} />;
 
-  return (
-    <div>
-      <h1>Account</h1>
+    if (this.state.isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    }
 
-      ...
+    return (
+      <div>
+        <h1>Account</h1>
 
-      {isLoggedIn
-        ? (
-          <LogoutButton onClick={this.handleLogoutClick} />
-        )
-        : (
-          <LoginButton onClick={this.handleLoginClick} />
-        )
-      }
-    </div>
-  )
+        ...
+
+        {button}
+      </div>
+    )
+  }
+}
+```
+
+---
+
+```jsx
+class LoginControl extends React.Component {
+  ...
+
+  render() {
+    const { isLoggedIn } = this.state;
+
+    return (
+      <div>
+        <h1>Account</h1>
+
+        ...
+
+        {isLoggedIn
+          ? (
+            <LogoutButton onClick={this.handleLogoutClick} />
+          )
+          : (
+            <LoginButton onClick={this.handleLoginClick} />
+          )
+        }
+      </div>
+    )
+  }
 }
 ```
 
@@ -990,9 +1190,10 @@ function Mailbox(props) {
 
 ---
 
-## Prevent output
+## Preventing output
 
 ```jsx
+// WarningBanner component
 function WarningBanner(props) {
   if ( ! props.warn) return null;
 
@@ -1003,11 +1204,13 @@ function WarningBanner(props) {
   );
 }
 
+// Page component
 function Page(props) {
   ...
   return (
     <section>
       <WarningBanner warn={props.hasWarning} message={props.warningMessage} />
+
       <button onClick={props.handleClick}>Toggle</button>
     </section>
   );
@@ -1064,7 +1267,7 @@ return <ul>{listItems}</ul>;
 
 ---
 
-# I've got the key...
+## I've got the key...
 
 ```jsx
 const numbers = [1, 2, 3, 4, 5];
@@ -1088,7 +1291,7 @@ return <ul>{listItems}</ul>;
 
 ---
 
-## Wrong key
+## Wrong key placement
 
 ```jsx
 function ListItem(props) {
@@ -1171,3 +1374,7 @@ function NumberList(props) {
 # Exercise Set #4
 
 <small>Lists & Keys</small>
+
+---
+
+<Link to="/">Home</Link>

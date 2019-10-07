@@ -9,7 +9,8 @@ import ReactSpinner from '../../components/SpinReactLogo';
 
 // TODO: Control oder of this list..
 const makeLinkToSlide = decks => props => {
-  const title = decks.find(d => d.slug === props.slug).title || props.slug;
+  let title = decks.find(d => d.slug === props.slug);
+  title = (title && title.title) || props.slug;
 
   return (
     <Styled.li>
