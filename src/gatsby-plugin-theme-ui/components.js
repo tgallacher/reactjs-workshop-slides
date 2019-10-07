@@ -8,6 +8,10 @@ import {
   FullScreenCode,
   Image as BgSlideImage,
 } from 'gatsby-theme-mdx-deck';
+import styled from '@emotion/styled';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import prismStyle from '@theme-ui/prism/presets/prism-tomorrow.json';
+import { Link } from 'gatsby';
 
 import ReactSpinner from '../components/SpinReactLogo.jsx';
 // import Callout from '../components/Callout.jsx';
@@ -40,6 +44,7 @@ const Callout = ({ sx, ...props }) => (
 const Div = ({ sx, ...props }) => <div sx={sx} {...props} />;
 
 export default {
+  Link,
   pre: ({ children }) => <>{children}</>,
   code: Prism,
   //
@@ -56,4 +61,14 @@ export default {
   Callout,
   Emoji,
   Div,
+  ReactLive: props => (
+    <LiveProvider code={props.code.trim()} noInline={true}>
+      <StyledEditor />
+      <LiveError />
+
+      <Appear>
+        <LivePreview />
+      </Appear>
+    </LiveProvider>
+  ),
 };
