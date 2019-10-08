@@ -99,6 +99,19 @@ export default ({ pageContext, ...props }) => {
             <LinkToSlide slug="/bonus-css-in-js" />
           </Styled.ul>
         </section>
+
+        <div
+          sx={{
+            position: 'fixed',
+            bottom: 3,
+            color: 'gray',
+            fontStyle: 'italic',
+          }}
+        >
+          The course material is made available for private, non commercial use
+          under the GPLv3.0 license. If you would like to use this material to
+          run your own workshop then please contact me.
+        </div>
       </div>
     </React.Fragment>
   );
