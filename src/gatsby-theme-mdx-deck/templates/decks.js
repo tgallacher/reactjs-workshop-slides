@@ -6,6 +6,8 @@ import { Helmet } from 'react-helmet';
 
 import ReactIcon from '../../../decks/static/images/react-icon.svg';
 import ReactSpinner from '../../components/SpinReactLogo';
+import GithubLogo from '../../images/github-mark-120px-plus.png';
+import TwitterLogo from '../../images/twitter_social_icon_circle_color.png';
 
 // TODO: Control oder of this list..
 const makeLinkToSlide = decks => props => {
@@ -51,9 +53,22 @@ export default ({ pageContext, ...props }) => {
         <ReactSpinner width="512px" src={ReactIcon} />
 
         <Styled.h1>ReactJS Workshop</Styled.h1>
-        <Styled.p sx={{ fontStyle: 'italic', fontSize: 4, mt: -5 }}>
+        <Styled.p sx={{ fontSize: 4, mt: -6 }}>Autumn 2019</Styled.p>
+        <Styled.p sx={{ fontStyle: 'italic', fontSize: 4 }}>
           Tom Gallacher, Ph.D
         </Styled.p>
+
+        <div sx={{ '>a': { mx: 2 } }}>
+          <a href="https://github.com/tgallacher" title="Find me on Github">
+            <img src={GithubLogo} alt="Github logo" width="48" />
+          </a>
+          <a
+            href="https://twitter.com/tfgallacher"
+            title="Follow my occasional ramblings on Twitter"
+          >
+            <img src={TwitterLogo} alt="Twitter logo" width="48" />
+          </a>
+        </div>
 
         <section
           sx={{
