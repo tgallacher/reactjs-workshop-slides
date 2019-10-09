@@ -63,7 +63,7 @@ export default {
     />
   ),
   Div: ({ sx, ...props }) => <div sx={sx} {...props} />,
-  ReactLive: ({ code, scope, ...props }) => (
+  ReactLive: ({ code, scope, withAppear = true, ...props }) => (
     <LiveProvider
       code={code.trim()}
       scope={{
@@ -78,9 +78,13 @@ export default {
       <StyledEditor />
       <LiveError />
 
-      <Appear>
+      {withAppear ? (
+        <Appear>
+          <LivePreview />
+        </Appear>
+      ) : (
         <LivePreview />
-      </Appear>
+      )}
     </LiveProvider>
   ),
 };
