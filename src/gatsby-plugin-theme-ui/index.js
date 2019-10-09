@@ -44,6 +44,13 @@ export default {
     Slide: {
       fontFamily: 'body',
       fontSize: [4, 5],
+      del: {
+        'color': 'purple',
+        // 'textDecorationStyle': 'wavy',
+        '>code': {
+          opacity: 0.5,
+        },
+      },
     },
     h1: {
       variant: 'text.heading',
@@ -89,6 +96,9 @@ export default {
     },
     inlineCode: {
       fontFamily: 'monospace',
+      bg: 'highlight',
+      color: 'secondary',
+      px: 1,
     },
     code: {
       fontFamily: 'monospace',
@@ -129,6 +139,13 @@ export default {
     },
     blockquote: {
       fontWeight: 'bold',
+      borderWidth: 0,
+      borderLeftColor: 'secondary',
+      borderLeftWidth: 6,
+      borderStyle: 'solid',
+      bg: 'muted',
+      p: 4,
+      mt: 4,
     },
   },
 };

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import React from 'react'; // eslint-disable-line
+import React, { useState, useEffect, useContext } from 'react'; // eslint-disable-line
 import Prism from '@theme-ui/prism';
 import {
   Appear,
@@ -14,9 +14,15 @@ import prismStyle from '@theme-ui/prism/presets/prism-tomorrow.json';
 import { Link } from 'gatsby';
 
 import ReactSpinner from '../components/SpinReactLogo.jsx';
-// import Callout from '../components/Callout.jsx';
 
 const StyledEditor = styled(LiveEditor)(prismStyle);
+
+const Div = styled.div({
+  'margin': '1em 0',
+  '> span': {
+    paddingRight: '1em',
+  },
+});
 
 export default {
   Link,
@@ -57,8 +63,18 @@ export default {
     />
   ),
   Div: ({ sx, ...props }) => <div sx={sx} {...props} />,
-  ReactLive: props => (
-    <LiveProvider code={props.code.trim()} noInline={true}>
+  ReactLive: ({ code, scope, ...props }) => (
+    <LiveProvider
+      code={code.trim()}
+      scope={{
+        useState,
+        useEffect,
+        useContext,
+        Div,
+        ...scope,
+      }}
+      noInline={true}
+    >
       <StyledEditor />
       <LiveError />
 
