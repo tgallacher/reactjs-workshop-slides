@@ -5,6 +5,7 @@ module.exports = {
     author: `@tgallacher`,
   },
   plugins: [
+    'gatsby-plugin-remove-generator',
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-theme-ui`,
     'gatsby-theme-mdx-deck',
