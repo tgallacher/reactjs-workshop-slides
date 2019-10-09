@@ -579,6 +579,128 @@ function Content() {
 
 ---
 
+# Hooks
+
+<Emoji sx={{ fontSize: 8 }} className="em-fishing_pole_and_fish" />
+
+---
+
+## What is a "_hook_"?
+
+- Standard JavaScript functions
+- Access React's component lifecycle
+- Share stateful logic between components
+- Simplify + collocate logic into smaller chunks
+- Improved reusability of logic/functionality
+
+> Introduced in React v16.8
+
+<Notes>
+
+- Share logic/state between components without changing component hierarchy
+- Logic is no longer spread across multiple Lifecycle methods; they can live together
+- They let us ditch `class` components which are confusing to people + minifiers
+- They remove component wrapper hell
+- They remove the need for render props / HoCs, etc.
+
+</Notes>
+
+---
+
+## Hooks API
+
+- `useState`
+- `useEffect`
+- `useContext`
+- `useReducer`
+- `useCallback`
+- `useMemo`
+- `useRef`
+- `useImperativeHandle`
+- `useLayoutEffect`
+- `useDebugValue`
+
+---
+
+## Hooks API
+
+- `useState`
+- `useEffect`
+- `useContext`
+- ~~`useReducer`~~
+- ~~`useCallback`~~
+- ~~`useMemo`~~
+- ~~`useRef`~~
+- ~~`useImperativeHandle`~~
+- ~~`useLayoutEffect`~~
+- ~~`useDebugValue`~~
+
+---
+
+# `useState`
+
+Set up and manage state
+
+---
+
+```js
+import { useState } from 'react';
+
+const [count, setCount] = useState(0);
+```
+
+---
+
+```js
+const [count, setCount] = useState(0);
+```
+
+- **count** - Current value of state (a single number; think `this.state.count`)
+
+- **setCount** - State update function (think: `this.setState()`)
+
+> Note: Using "_array destructuring_" -- `state` and `update function` can be called anything
+
+---
+
+import { useStateClassExample } from './static/snippets/liveCodeExamples';
+
+## Example: Class Component
+
+<ReactLive code={useStateClassExample} />
+
+---
+
+import { useStateFunctionExample } from './static/snippets/liveCodeExamples';
+
+## Example: Hook
+
+<ReactLive code={useStateFunctionExample} />
+
+---
+
+## What if we need more state?
+
+---
+
+import { useStateFunctionExampleMultiState } from './static/snippets/liveCodeExamples';
+
+## Example: Multi-Hook
+
+<ReactLive code={useStateFunctionExampleMultiState} />
+
+---
+
+# Rules
+
+- Naming: `use*`
+- Only use in: **a)** React function components, or **b)** a custom Hook
+- Only call hooks at the top level (not in loops, conditionals, etc)
+
+> see: `eslint-plugin-react-hooks`
+
+---
+
 # /fin
 
 <Div sx={{ fontSize: 8, mt: -5, mb: 4 }}>🎉 🎉 🎉</Div>

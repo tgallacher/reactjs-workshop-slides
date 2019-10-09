@@ -97,3 +97,66 @@ render(
   <App />
 );
 `.trim();
+
+export const useStateClassExample = `
+class Foo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      count: 0,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.setState(prevState => ({ count: prevState.count + 1 }));
+  }
+
+  render() {
+    return (
+      <Div>
+        <span>Clicked count: {this.state.count} times</span>
+        <button onClick={this.handleClick}>Update</button>
+      </Div>
+    );
+  }
+}
+
+render(<Foo />);
+`;
+
+export const useStateFunctionExample = `
+function Foo(props) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Div>
+      <span>Clicked count: {count} times</span>
+      <button onClick={() => setCount(count + 1)}>Update</button>
+    </Div>
+  );
+};
+
+render(<Foo />);
+`;
+
+export const useStateFunctionExampleMultiState = `
+function Foo(props) {
+  const [count, setCount] = useState(0);
+  const [icr, setIcr] = useState(10);
+
+  return (
+    <Div>
+      <span>Clicked count: {count} times (icr = {icr})</span>
+      <button onClick={() => {
+        setCount(count + 1);
+        setIcr(icr + 1);
+      }}>Update</button>
+    </Div>
+  );
+};
+
+render(<Foo />);
+`;
