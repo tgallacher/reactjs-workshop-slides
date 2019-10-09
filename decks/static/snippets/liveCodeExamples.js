@@ -10,22 +10,22 @@ export const jsxExpressionsA = `
 const element = <h1>Hello, Mary Poppins</h1>;
 
 render(element)
-`.trim();
+`;
 
 export const jsxExpressionsB = `
 const name = 'Mary Poppins';
 const element = <h1>Hello, {name}</h1>;
 
 render(element)
-`.trim();
+`;
 
 export const jsxExpressionsC1 = `
-  render(
+render(
   <h1>
     Time: {(new Date().toLocaleTimeString('en-US'))}
   </h1>
 );
-`.trim();
+`;
 
 export const jsxExpressionsC2 = `
 const getName = () => 'Harry Potter';
@@ -38,7 +38,7 @@ const element = (
 
 
 render(element)
-`.trim();
+`;
 
 export const jsxExpressionsC3 = `
 const element = (
@@ -50,7 +50,7 @@ const element = (
 );
 
 render(element)
-`.trim();
+`;
 
 export const jsxExpressionsD = `
 function greetUser(isLoggedIn, username){
@@ -62,7 +62,7 @@ function greetUser(isLoggedIn, username){
 }
 
 render(greetUser(false, undefined))
-`.trim();
+`;
 
 //
 // RENDERING COMPONENTS
@@ -76,11 +76,11 @@ function Welcome(props){
 render(
   <Welcome name="Mary" />
 );
-`.trim();
+`;
 
 export const renderingComponentsB = `
 function Welcome(props){
-  return <h1>Hello, {props.name}</h1>;
+  return <h2>Hello, {props.name}</h2>;
 }
 
 function App(){
@@ -93,7 +93,24 @@ function App(){
   )
 }
 
-render(
-  <App />
-);
-`.trim();
+render(<App />);
+`;
+
+export const classComponentState = `
+class Foo extends React.Component {
+  constructor(props) {
+    super(props); // Important!
+
+    this.state = {
+      bar: 'baz',
+    };
+
+  }
+
+  render() {
+    return <h1>Hello {this.state.bar}</h1>;
+  }
+}
+
+render(<Foo />);
+`;

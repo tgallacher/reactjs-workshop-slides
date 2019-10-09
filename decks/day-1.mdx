@@ -213,14 +213,12 @@ Composable / Modular
 # MVP React App
 
 <!-- prettier-ignore-start -->
-
 ```jsx
 ReactDOM.render(
   <h1>Hello, world!</h1>,
   document.getElementById('root')
 );
 ```
-
 <!-- prettier-ignore-end -->
 
 <Notes>
@@ -314,6 +312,7 @@ React.creatElement('h1', { id: 'my-id' }, 'Hello, world!');
 
 // Yes!
 const Custom = foo[type];
+
 <Custom />
 ```
 
@@ -519,11 +518,11 @@ class Welcome extends React.Component {
 
 ---
 
-<!-- // import { renderingComponentsA } from './static/snippets/LiveCodeExamples'; -->
+import { renderingComponentsA } from './static/snippets/liveCodeExamples';
 
 # Rendering Components
 
-<!-- <LiveCodeEditor {...renderingComponentsA} /> -->
+<ReactLive code={renderingComponentsA} />
 
 <Notes>
 
@@ -536,11 +535,11 @@ class Welcome extends React.Component {
 
 ---
 
-<!-- // import { renderingComponentsB } from './static/snippets/LiveCodeExamples'; -->
+import { renderingComponentsB } from './static/snippets/liveCodeExamples';
 
 ## Component Composition
 
-<!-- <LiveCodeEditor {...renderingComponentsB} /> -->
+<ReactLive code={renderingComponentsB} />
 
 <Notes>
 
@@ -574,8 +573,6 @@ class Welcome extends React.Component {
 </Notes>
 
 ---
-
-<!-- // export default Invert; -->
 
 # Exercise Setup
 
@@ -622,27 +619,15 @@ yarn start
 
 ---
 
-# Class Components: Component State
+## Class Components:
+
+Component State
 
 ---
 
-```jsx
-class Foo extends React.Component {
-  constructor(props) {
-    super(props); // Important!
+import { classComponentState } from './static/snippets/liveCodeExamples';
 
-    this.state = {
-      bar: 'baz',
-    };
-  }
-
-  render() {
-    return <h1>Hello {this.state.bar}</h1>;
-  }
-}
-```
-
-<!-- prettier-ignore-start -->
+<ReactLive withAppear={false} code={classComponentState} />
 
 <Notes>
 
@@ -650,8 +635,6 @@ class Foo extends React.Component {
   - Only do so if the prop is the initial state == call the prop "initialFoo"..
 
 </Notes>
-
-<!-- prettier-ignore-end -->
 
 ---
 
@@ -743,7 +726,19 @@ import LifecycleImg from './static/images/react-component-lifecycle-methods.png'
 
 # Component Lifecycle
 
-<img src={LifecycleImg} alt="Lifecycle Img" />
+<img src={LifecycleImg} width="1200" alt="Lifecycle Img" />
+
+<Div
+  sx={{
+    fontStyle: 'italic',
+    position: 'fixed',
+    fontSize: 3,
+    bottom: 3,
+    color: 'gray',
+  }}
+>
+  source: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+</Div>
 
 ---
 
