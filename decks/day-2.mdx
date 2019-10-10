@@ -439,9 +439,11 @@ function BlogPost(props) {
 
 ---
 
+import DeepDom from './static/images/deep-nested-dom.png';
+
 # Why is this a problem
 
-![Deep tree](./static/images/deep-nested-dom.png)
+<img src={DeepDom} alt="Deep nested dom" />
 
 ---
 
@@ -626,7 +628,7 @@ function Content() {
 
 - `useState`
 - `useEffect`
-- `useContext`
+- ~~`useContext`~~
 - ~~`useReducer`~~
 - ~~`useCallback`~~
 - ~~`useMemo`~~
@@ -710,12 +712,183 @@ Examples:
 ```js
 import { useEffect } from 'react';
 
-const [count, setCount] = useEffect(() => {});
+useEffect(() => {
+  /* do some side effect */
+}, depsArray);
+```
+
+- `useEffect` shares some parallels with `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` combined
+- `depsArray` allows us to control which of the above parallels we want to leverage
+
+---
+
+## Controlling effect execution
+
+run after mount + after any re-render
+
+```js
+useEffect(cb);
+```
+
+run after mount
+
+```js
+useEffect(cb, []);
+```
+
+run after mount + only when either "_a_", "_b_", **OR** "_c_" change
+
+```js
+useEffect(cb, [a, b, c]);
 ```
 
 ---
 
-# Rules
+### Example
+
+```jsx
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  componentDidUpdate() {
+    // Need to duplicate our code 🤮
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+---
+
+### Now with hooks
+
+```jsx
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // Update after EVERY render
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
+
+---
+
+## Tip
+
+- `useEffect` is _non-blocking_:
+  - the browser still displays changes to the user
+- This is **not** how `componentDidMount` or `componentDidUpdate` function.
+  - These are synchronous/blocking calls
+- If you need this exact behaviour, use `useLayoutEffect` instead
+
+---
+
+## How do we "cleanup"?
+
+```jsx
+// Note: omitting full implementation for brevity
+class Clock extends React.Component {
+  ...
+
+  componentDidMount() {
+    this.timerId = setInterval(() => {
+      this.setState({ timestamp: prevState => prevState.timestamp + 1000 })
+    }, 1000);
+  }
+
+  // How do we do this with useEffect?
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+
+  render() {
+    ...
+
+    return (
+      ...
+    );
+  }
+}
+```
+
+---
+
+### Return a cleanup function
+
+```jsx
+function Clock() {
+  const [timestamp, setTimestamp] = useState(Date.now());
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimestamp(Date.now());
+    }, 1000);
+
+    // Clean up
+    return () => {
+      clearInterval(timerId);
+    };
+  });
+
+  return (
+    ...
+  );
+}
+```
+
+---
+
+### Tip
+
+- Similar to `useState`, you can add more than **1** `useEffect` call
+
+```js
+function Foo() {
+  useEffect(() => {
+    // side-effect A logic
+  });
+
+  useEffect(() => {
+    // side-effect B logic
+  });
+
+  useEffect(() => {
+    // side-effect C logic
+  }, []); // even with different call behaviours
+
+  return ...
+}
+```
+
+---
+
+# 🧼 Hook Rules
 
 - Naming: `use*`
 - Only use in: **a)** React function components, or **b)** a custom Hook
