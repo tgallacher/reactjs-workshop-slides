@@ -828,7 +828,7 @@ class Foo extends React.Component {
 - Invoked immediately after mounting
 - Initialisers requiring DOM should be done here
 - (Async) side-effects here
-- setState() is ok here
+- `setState()` is ok here
 
 <Notes>
 
@@ -879,7 +879,7 @@ class Foo extends React.Component {
 - Invoked immediately after (prop/state) update
 - DOM available
 - (Async) side-effects here (_wrapped in conditional_)
-- setState() is ok here (_wrapped in conditional_)
+- `setState()` is ok here (_wrapped in conditional_)
 
 <Notes>
 
@@ -946,13 +946,13 @@ class Foo extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // Convent: `handle*`
+  // Convention: `handle*`
   handleClick(event) {
     // do something
   }
 
   render() {
-    // `onClick` DOM API
+    // `onclick` DOM API
     return <button onClick={this.handleClick}>Update</button>;
   }
 }
@@ -1028,16 +1028,12 @@ class LoginControl extends React.Component {
 }
 ```
 
-<!-- prettier-ignore-start -->
-
 <Notes>
 
 - Shorter way to do this...
   - ternary operator
 
 </Notes>
-
-<!-- prettier-ignore-end -->
 
 ---
 
@@ -1111,6 +1107,8 @@ class LoginControl extends React.Component {
 
 ---
 
+### To this:
+
 ```jsx
 class LoginControl extends React.Component {
   ...
@@ -1125,12 +1123,8 @@ class LoginControl extends React.Component {
         ...
 
         {isLoggedIn
-          ? (
-            <LogoutButton onClick={this.handleLogoutClick} />
-          )
-          : (
-            <LoginButton onClick={this.handleLoginClick} />
-          )
+          ? <LogoutButton onClick={this.handleLogoutClick} />
+          : <LoginButton onClick={this.handleLoginClick} />
         }
       </div>
     )
@@ -1148,6 +1142,8 @@ in JS we also have inline `if` using && logical operator
 </Notes>
 
 ---
+
+### Tip: Use JS inline `if`
 
 ```jsx
 function Mailbox(props) {
@@ -1283,6 +1279,7 @@ return <ul>{listItems}</ul>;
 ```jsx
 function ListItem(props) {
   const value = props.value;
+
   return (
     // Wrong! There is no need to specify the key here:
     <li key={value.toString()}>{value}</li>
@@ -1291,6 +1288,7 @@ function ListItem(props) {
 
 function NumberList(props) {
   const numbers = props.numbers;
+
   // Wrong! The key should have been specified here:
   const listItems = numbers.map(number => <ListItem value={number} />);
 
@@ -1317,10 +1315,12 @@ function ListItem(props) {
 
 function NumberList(props) {
   const numbers = props.numbers;
+
+  // Correct! Key should be specified inside the array.
   const listItems = numbers.map(number => (
-    // Correct! Key should be specified inside the array.
     <ListItem key={number.toString()} value={number} />
   ));
+
   return <ul>{listItems}</ul>;
 }
 ```
